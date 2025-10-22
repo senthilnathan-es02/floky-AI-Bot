@@ -1,0 +1,223 @@
+ .blackbox-container {
+          min-height: 100vh;
+          background: #000000;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .header {
+          margin-bottom: 2rem;
+        }
+
+        .badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 9999px;
+          padding: 0.5rem 1rem;
+          color: #fff;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .badge:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .badge-new {
+          background: #fff;
+          color: #000;
+          padding: 0.15rem 0.6rem;
+          border-radius: 9999px;
+          font-size: 0.75rem;
+          font-weight: 600;
+        }
+
+        .badge-text {
+          font-size: 0.875rem;
+          font-weight: 500;
+        }
+
+        .title {
+          color: #fff;
+          font-size: 3rem;
+          font-weight: 700;
+          margin-bottom: 3rem;
+          text-align: center;
+        }
+
+        .chat-interface {
+          width: 100%;
+          max-width: 900px;
+          position: relative;
+        }
+
+        .avatar-indicator {
+          position: absolute;
+          left: 1.5rem;
+          top: 1.5rem;
+          z-index: 10;
+        }
+
+        .avatar-dot {
+          width: 8px;
+          height: 8px;
+          background: #3b82f6;
+          border-radius: 50%;
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.5;
+          }
+        }
+
+        .input-container {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 1.5rem;
+          padding: 1.5rem 5rem 1.5rem 1.5rem;
+          position: relative;
+          margin-bottom: 1rem;
+          transition: all 0.2s;
+        }
+
+        .input-container:focus-within {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .message-input {
+          width: 100%;
+          background: transparent;
+          border: none;
+          color: #fff;
+          font-size: 1rem;
+          outline: none;
+        }
+
+        .message-input::placeholder {
+          color: rgba(255, 255, 255, 0.4);
+        }
+
+        .input-actions {
+          position: absolute;
+          right: 1rem;
+          top: 50%;
+          transform: translateY(-50%);
+          display: flex;
+          gap: 0.5rem;
+        }
+
+        .action-btn {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          border: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .mic-btn {
+          background: transparent;
+          color: rgba(255, 255, 255, 0.6);
+        }
+
+        .mic-btn:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: #fff;
+        }
+
+        .send-btn {
+          background: #fff;
+          color: #000;
+        }
+
+        .send-btn:hover {
+          background: rgba(255, 255, 255, 0.9);
+        }
+
+        .bottom-bar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 0.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .attach-btn {
+          background: transparent;
+          border: none;
+          color: rgba(255, 255, 255, 0.6);
+          cursor: pointer;
+          padding: 0.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 0.5rem;
+          transition: all 0.2s;
+        }
+
+        .attach-btn:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: #fff;
+        }
+
+        .model-selector {
+          background: transparent;
+          border: none;
+          color: rgba(255, 255, 255, 0.8);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 0.5rem;
+          font-size: 0.875rem;
+          transition: all 0.2s;
+        }
+
+        .model-selector:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-text {
+          text-align: center;
+          color: rgba(255, 255, 255, 0.5);
+          font-size: 0.875rem;
+          padding: 0.5rem;
+        }
+
+        .upgrade-link {
+          color: #3b82f6;
+          text-decoration: none;
+          margin-left: 0.5rem;
+        }
+
+        .upgrade-link:hover {
+          text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+          .title {
+            font-size: 2rem;
+          }
+
+          .chat-interface {
+            max-width: 100%;
+          }
+        }
