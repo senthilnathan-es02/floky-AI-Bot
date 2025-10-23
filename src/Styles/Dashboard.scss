@@ -1,223 +1,241 @@
- .blackbox-container {
-          min-height: 100vh;
-          background: #000000;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 2rem;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        }
+.blackbox-container {
+  min-height: 100vh;
+  background: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
 
-        .header {
-          margin-bottom: 2rem;
-        }
+// ---------------- HEADER ----------------
+.header {
+  margin-bottom: 2rem;
+}
 
-        .badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 9999px;
-          padding: 0.5rem 1rem;
-          color: #fff;
-          cursor: pointer;
-          transition: all 0.2s;
-        }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
 
-        .badge:hover {
-          background: rgba(255, 255, 255, 0.08);
-          border-color: rgba(255, 255, 255, 0.2);
-        }
+.badge:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
 
-        .badge-new {
-          background: #fff;
-          color: #000;
-          padding: 0.15rem 0.6rem;
-          border-radius: 9999px;
-          font-size: 0.75rem;
-          font-weight: 600;
-        }
+.badge-new {
+  background: #fff;
+  color: #000;
+  padding: 0.15rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
 
-        .badge-text {
-          font-size: 0.875rem;
-          font-weight: 500;
-        }
+.badge-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
 
-        .title {
-          color: #fff;
-          font-size: 3rem;
-          font-weight: 700;
-          margin-bottom: 3rem;
-          text-align: center;
-        }
+// ---------------- TITLE ----------------
+.title {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  text-align: center;
+}
 
-        .chat-interface {
-          width: 100%;
-          max-width: 900px;
-          position: relative;
-        }
+// ---------------- CHAT INTERFACE ----------------
+.chat-interface {
+  width: 100%;
+  max-width: 900px;
+  position: relative;
+}
 
-        .avatar-indicator {
-          position: absolute;
-          left: 1.5rem;
-          top: 1.5rem;
-          z-index: 10;
-        }
+// ---------------- AVATAR INDICATOR ----------------
+.avatar-indicator {
+  position: absolute;
+  left: 1.5rem;
+  top: 1.5rem;
+  z-index: 10;
+}
 
-        .avatar-dot {
-          width: 8px;
-          height: 8px;
-          background: #3b82f6;
-          border-radius: 50%;
-          animation: pulse 2s infinite;
-        }
+.avatar-dot {
+  width: 8px;
+  height: 8px;
+  background: #3b82f6;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
 
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.5;
-          }
-        }
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
 
-        .input-container {
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 1.5rem;
-          padding: 1.5rem 5rem 1.5rem 1.5rem;
-          position: relative;
-          margin-bottom: 1rem;
-          transition: all 0.2s;
-        }
+// ---------------- CHAT BOX ----------------
+.chat-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
 
-        .input-container:focus-within {
-          background: rgba(255, 255, 255, 0.08);
-          border-color: rgba(255, 255, 255, 0.2);
-        }
+.chat-message {
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  max-width: 80%;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
 
-        .message-input {
-          width: 100%;
-          background: transparent;
-          border: none;
-          color: #fff;
-          font-size: 1rem;
-          outline: none;
-        }
+.user-msg {
+  background: #3b82f6;
+  color: white;
+  align-self: flex-end;
+}
 
-        .message-input::placeholder {
-          color: rgba(255, 255, 255, 0.4);
-        }
+.ai-msg {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  align-self: flex-start;
+}
 
-        .input-actions {
-          position: absolute;
-          right: 1rem;
-          top: 50%;
-          transform: translateY(-50%);
-          display: flex;
-          gap: 0.5rem;
-        }
+.loading {
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  animation: blink 1.5s infinite;
+}
 
-        .action-btn {
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          border: none;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.2s;
-        }
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
 
-        .mic-btn {
-          background: transparent;
-          color: rgba(255, 255, 255, 0.6);
-        }
+// ---------------- INPUT AREA ----------------
+.input-container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 1.5rem 5rem 1.5rem 1.5rem;
+  position: relative;
+  margin-bottom: 1rem;
+  transition: all 0.2s;
+}
 
-        .mic-btn:hover {
-          background: rgba(255, 255, 255, 0.1);
-          color: #fff;
-        }
+.input-container:focus-within {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
 
-        .send-btn {
-          background: #fff;
-          color: #000;
-        }
+.message-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+}
 
-        .send-btn:hover {
-          background: rgba(255, 255, 255, 0.9);
-        }
+.message-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
 
-        .bottom-bar {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 0 0.5rem;
-          margin-bottom: 1rem;
-        }
+.input-actions {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
 
-        .attach-btn {
-          background: transparent;
-          border: none;
-          color: rgba(255, 255, 255, 0.6);
-          cursor: pointer;
-          padding: 0.5rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 0.5rem;
-          transition: all 0.2s;
-        }
+.action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
 
-        .attach-btn:hover {
-          background: rgba(255, 255, 255, 0.1);
-          color: #fff;
-        }
+.mic-btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+}
 
-        .model-selector {
-          background: transparent;
-          border: none;
-          color: rgba(255, 255, 255, 0.8);
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.5rem 1rem;
-          border-radius: 0.5rem;
-          font-size: 0.875rem;
-          transition: all 0.2s;
-        }
+.mic-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
 
-        .model-selector:hover {
-          background: rgba(255, 255, 255, 0.1);
-        }
+.send-btn {
+  background: #fff;
+  color: #000;
+}
 
-        .footer-text {
-          text-align: center;
-          color: rgba(255, 255, 255, 0.5);
-          font-size: 0.875rem;
-          padding: 0.5rem;
-        }
+.send-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
 
-        .upgrade-link {
-          color: #3b82f6;
-          text-decoration: none;
-          margin-left: 0.5rem;
-        }
+// ---------------- FOOTER ----------------
+.footer-text {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.875rem;
+  padding: 0.5rem;
+}
 
-        .upgrade-link:hover {
-          text-decoration: underline;
-        }
+.upgrade-link {
+  color: #3b82f6;
+  text-decoration: none;
+  margin-left: 0.5rem;
+}
 
-        @media (max-width: 768px) {
-          .title {
-            font-size: 2rem;
-          }
+.upgrade-link:hover {
+  text-decoration: underline;
+}
 
-          .chat-interface {
-            max-width: 100%;
-          }
-        }
+// ---------------- RESPONSIVE ----------------
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .chat-interface {
+    max-width: 100%;
+  }
+
+  .chat-box {
+    max-height: 300px;
+  }
+}

@@ -1,60 +1,83 @@
-import React, { useState } from 'react';
-import { Mic, ArrowUp, Paperclip, ChevronDown } from 'lucide-react';
-import '../Styles/Dashboard.scss';
+import React, { useState } from "react";
+import { ArrowUp } from "lucide-react";
+import "../Styles/Dashboard.scss";
 
 export default function BlackboxAI() {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
+  const [chat, setChat] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const handleSend = async () => {
+    if (!message.trim()) return;
+
+    const newChat = [...chat, { sender: "user", text: message }];
+    setChat(newChat);
+    setMessage("");
+    setLoading(true);
+
+    try {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer sk-xxxxxxxxxxxxxxxxxxxx`, // <-- Replace with your API key
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: message }],
+        }),
+      });
+
+      const data = await response.json();
+      const aiMessage = data.choices?.[0]?.message?.content || "AI Error...";
+
+      setChat([...newChat, { sender: "ai", text: aiMessage }]);
+    } catch (error) {
+      setChat([...newChat, { sender: "ai", text: "Error fetching response." }]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="blackbox-container">
-      {/* <div className="header">
-        <div className="badge">
-          <span className="badge-new">New</span>
-          <span className="badge-text">BLACKBOX AI Remote Agents</span>
-          <ChevronDown size={16} />
-        </div>
-      </div> */}
-
-      <h1 className="title">Chat Bot</h1>
+      <h1 className="title">Hi, Flok — What Happened Today?</h1>
 
       <div className="chat-interface">
-        <div className="avatar-indicator">
-          <div className="avatar-dot"></div>
+        <div className="chat-box">
+          {chat.map((msg, index) => (
+            <div
+              key={index}
+              className={`chat-message ${msg.sender === "user" ? "user-msg" : "ai-msg"}`}
+            >
+              {msg.text}
+            </div>
+          ))}
+          {loading && <div className="loading">Thinking...</div>}
         </div>
-        
+
         <div className="input-container">
           <input
             type="text"
-            placeholder="Message Blackbox"
+            placeholder="Message Blackbox..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSend()}
             className="message-input"
           />
-          
+
           <div className="input-actions">
-            <button className="action-btn mic-btn">
-              <Mic size={20} />
-            </button>
-            <button className="action-btn send-btn">
+            <button onClick={handleSend} className="action-btn send-btn">
               <ArrowUp size={20} />
             </button>
           </div>
         </div>
 
-        <div className="bottom-bar">
-          <button className="attach-btn">
-            <Paperclip size={18} />
-          </button>
-          
-          <button className="model-selector">
-            <span>Select Models</span>
-            <ChevronDown size={16} />
-          </button>
-        </div>
-
         <div className="footer-text">
           Get access to the best AI Agent.
-          <a href="#" className="upgrade-link">Upgrade plan</a>
+          <a href="#" className="upgrade-link">
+            Upgrade plan
+          </a>
         </div>
       </div>
     </div>
