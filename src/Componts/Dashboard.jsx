@@ -16,11 +16,12 @@ export default function BlackboxAI() {
     setLoading(true);
 
     try {
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer sk-xxxxxxxxxxxxxxxxxxxx`, // <-- Replace with your API key
+         Authorization: `Bearer ${import.meta.env.VITE_OPENROUTER_KEY}`,
+
         },
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
@@ -33,6 +34,7 @@ export default function BlackboxAI() {
 
       setChat([...newChat, { sender: "ai", text: aiMessage }]);
     } catch (error) {
+      console.error(error);
       setChat([...newChat, { sender: "ai", text: "Error fetching response." }]);
     } finally {
       setLoading(false);
@@ -41,7 +43,7 @@ export default function BlackboxAI() {
 
   return (
     <div className="blackbox-container">
-      <h1 className="title">Hi, Flok — What Happened Today?</h1>
+      <h1 className="title">Hi, Beauty — What Happened Today ?</h1>
 
       <div className="chat-interface">
         <div className="chat-box">
@@ -74,9 +76,9 @@ export default function BlackboxAI() {
         </div>
 
         <div className="footer-text">
-          Get access to the best AI Agent.
+          This is a model of AI.{" "}
           <a href="#" className="upgrade-link">
-            Upgrade plan
+            Get More Details
           </a>
         </div>
       </div>
