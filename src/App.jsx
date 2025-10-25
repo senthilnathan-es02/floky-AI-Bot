@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import BlackboxAI from "./Componts/Dashboard";
+import FlokyAI from "./pages/Dashboard";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<BlackboxAI />} />
+      <Route path="/" element={<FlokyAI />} />
     </Routes>
   );
 }

@@ -1,41 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ArrowUp } from "lucide-react";
-import "../Styles/Dashboard.scss";
+import "../styles/Dashboard.scss";
 
-export default function BlackboxAI() {
+export default function FlokyAI() {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const [loading, setLoading] = useState(false);
+  const chatBoxRef = useRef(null);
+
+  // Scroll to bottom when chat updates
+  useEffect(() => {
+    if (chatBoxRef.current) {
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    }
+  }, [chat, loading]);
 
   const handleSend = async () => {
-    if (!message.trim()) return;
+    const trimmedMessage = message.trim();
+    if (!trimmedMessage) return;
 
-    const newChat = [...chat, { sender: "user", text: message }];
-    setChat(newChat);
+    // Add user's message
+    setChat((prev) => [...prev, { sender: "user", text: trimmedMessage }]);
     setMessage("");
     setLoading(true);
 
     try {
-      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      const response = await fetch("http://localhost:5000/api/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-         Authorization: `Bearer ${import.meta.env.VITE_OPENROUTER_KEY}`,
-
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: message }],
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: trimmedMessage }),
       });
 
-      const data = await response.json();
-      const aiMessage = data.choices?.[0]?.message?.content || "AI Error...";
+      if (!response.ok) throw new Error("Network response not ok");
 
-      setChat([...newChat, { sender: "ai", text: aiMessage }]);
+      const data = await response.json();
+      const aiMessage = data.reply || "AI Error...";
+
+      // Add AI response
+      setChat((prev) => [...prev, { sender: "ai", text: aiMessage }]);
     } catch (error) {
-      console.error(error);
-      setChat([...newChat, { sender: "ai", text: "Error fetching response." }]);
+      console.error("Frontend Error:", error);
+      setChat((prev) => [...prev, { sender: "ai", text: "Error fetching response." }]);
     } finally {
       setLoading(false);
     }
@@ -43,10 +48,10 @@ export default function BlackboxAI() {
 
   return (
     <div className="blackbox-container">
-      <h1 className="title">Hi, Beauty — What Happened Today ?</h1>
+      <h1 className="title">Hi, Beauty — What Happened Today?</h1>
 
       <div className="chat-interface">
-        <div className="chat-box">
+        <div className="chat-box" ref={chatBoxRef}>
           {chat.map((msg, index) => (
             <div
               key={index}
@@ -61,13 +66,12 @@ export default function BlackboxAI() {
         <div className="input-container">
           <input
             type="text"
-            placeholder="Message Blackbox..."
+            placeholder="Message floky.ai..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
             className="message-input"
           />
-
           <div className="input-actions">
             <button onClick={handleSend} className="action-btn send-btn">
               <ArrowUp size={20} />
